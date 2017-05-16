@@ -1,3 +1,40 @@
+variable "admin_password" {
+  default = "iosjdaaosudj"
+}
+variable "admin_username" {
+  default = "terraformuser"
+}
+variable "rgr_name" {
+  default = "terraform-resourcegroup"
+}
+variable "sta_name" {
+  default = "fundamentalstore02"
+}
+variable "vm_name" {
+  default = "Terraform-SH01"
+}
+variable "vm_size" {
+  default = "Standard_A2_v2"
+}
+variable "dsc_registration_url" {
+  default = "https://we-agentservice-prod-1.azure-automation.net/accounts/a0f111a3-902e-4446-9b93-1b1651cc6807"
+}
+variable "dsc_registration_key" {
+  default = "R5FYmMDW69ocmbcdC4zhOPBNmuHPNuAkqoMjWAmg5DR7qcd8fPxRGs87oWEpEqmjvtAbEh8UPyL0D76UJC3eNQ=="
+}
+variable "dsc_configuration_name" {
+  default = "SessionHost.localhost"
+}  
+variable "location" {
+  default = "West Europe"
+}  
+variable "tag_environment" {
+  default = "West Europe"
+} 
+variable "vm_subnet_id" {
+  default = "/subscriptions/733a1ea1-2d00-45b8-a6f3-c05a5ef2d5c3/resourceGroups/rgr-jacob-network/providers/Microsoft.Network/virtualNetworks/vNet-Jacob/subnets/sessionhost"
+}  
+
 resource "azurerm_resource_group" "fundamentals" {
   name     = "${var.rgr_name}"
   location = "${var.location}"
@@ -85,10 +122,6 @@ resource "azurerm_virtual_machine" "fundamentals" {
     enable_automatic_upgrades = true
   }
 
-  boot_diagnostics {
-    enabled     = true
-    storage_uri = "${var.diagnostics_blob_endpoint}"
-  }
 
   tags {
     terraformManaged = "true"
